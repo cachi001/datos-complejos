@@ -2,6 +2,17 @@
 // Unidad 7 — Apunte interactivo. Vanilla JS, sin dependencias.
 // ============================================================
 
+// ---------- Theme toggle (oscuro por defecto) ----------
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+}
+
 // ---------- Multiple choice quizzes ----------
 document.querySelectorAll('.mcq').forEach((mcq) => {
   const correct = mcq.dataset.correct;

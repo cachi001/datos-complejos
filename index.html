@@ -5,10 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unidad 7 · Estructuras de Datos Complejas — Apunte interactivo</title>
 <meta name="description" content="Apunte interactivo de Unidad 7 (Programación I, TUP): TDA, tuplas, sets, diccionarios y cuándo usar cada uno.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  // Evita el flash de tema incorrecto al cargar
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 </head>
 <body>
 
@@ -17,6 +26,10 @@
     <span class="crumb">Programación I · TUP</span>
     <span class="crumb-sep">/</span>
     <span class="crumb crumb-current">Unidad 7 — Estructuras de Datos Complejas</span>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar entre tema oscuro y claro">
+      <span class="theme-toggle-icon" aria-hidden="true"></span>
+      <span class="theme-toggle-label">tema</span>
+    </button>
   </div>
 </header>
 
