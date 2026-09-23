@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 7 · Estructuras de Datos Complejas — Apunte interactivo</title>
+<meta name="description" content="Apunte interactivo de Unidad 7 (Programación I, TUP): TDA, tuplas, sets, diccionarios y cuándo usar cada uno.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="crumb">Programación I · TUP</span>
+    <span class="crumb-sep">/</span>
+    <span class="crumb crumb-current">Unidad 7 — Estructuras de Datos Complejas</span>
+  </div>
+</header>
+
+<nav class="bracket-nav" id="bracketNav" aria-label="Navegación por estructura">
+  <div class="bracket-nav-inner">
+    <a href="#tda" class="bnav-item" data-accent="tda">
+      <span class="bnav-glyph">?</span>
+      <span class="bnav-label">TDA</span>
+    </a>
+    <a href="#tuplas" class="bnav-item" data-accent="tupla">
+      <span class="bnav-glyph">( )</span>
+      <span class="bnav-label">Tuplas</span>
+    </a>
+    <a href="#sets" class="bnav-item" data-accent="set">
+      <span class="bnav-glyph">{ }</span>
+      <span class="bnav-label">Sets</span>
+    </a>
+    <a href="#dicts" class="bnav-item" data-accent="dict">
+      <span class="bnav-glyph">{&nbsp;:&nbsp;}</span>
+      <span class="bnav-label">Diccionarios</span>
+    </a>
+    <a href="#anidados" class="bnav-item" data-accent="nested">
+      <span class="bnav-glyph">{{ }}</span>
+      <span class="bnav-label">Anidados</span>
+    </a>
+    <a href="#combo" class="bnav-item" data-accent="combo">
+      <span class="bnav-glyph">[ for ]</span>
+      <span class="bnav-label">Comprensiones</span>
+    </a>
+    <a href="#decidir" class="bnav-item" data-accent="decide">
+      <span class="bnav-glyph">?:</span>
+      <span class="bnav-label">Cuándo usar</span>
+    </a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">Unidad 7</p>
+    <h1>Estructuras de<br>Datos Complejas</h1>
+    <p class="hero-sub">Hasta ahora te alcanzaba con listas. Esta unidad te da cuatro herramientas más — cada una resuelve un problema puntual que la lista resuelve mal, o no resuelve.</p>
+    <p class="hero-meta">Tocá un corchete de arriba para saltar directo a ese tema, o seguí leyendo en orden.</p>
+  </section>
+
+  <!-- TDA -->
+  <section class="topic" id="tda" data-accent="tda">
+    <div class="topic-head">
+      <span class="topic-glyph">?</span>
+      <div>
+        <p class="topic-eyebrow">Antes de arrancar</p>
+        <h2>Tipos de Datos Abstractos (TDA)</h2>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Un TDA se define por su <strong>comportamiento</strong> — las operaciones que permite — y no por cómo está armado por dentro.</p>
+      <p>Pensalo como el volante de un auto: sabés que girándolo doblás, sin necesitar saber cómo está conectado mecánicamente. O el control remoto de un televisor: apretás subir volumen y no te importa si por dentro manda una señal infrarroja o bluetooth. Esa parte queda escondida.</p>
+      <p>Tres beneficios concretos salen de pensarlo así: <strong>modularidad</strong>, <strong>reutilización</strong> y <strong>mantenimiento</strong> — el código que usa el TDA no depende de sus detalles internos.</p>
+    </div>
+
+    <div class="callout" data-accent="tda">
+      <p class="callout-label">Tres características</p>
+      <div class="trait-grid">
+        <div class="trait"><strong>Abstracción</strong><span>define qué hace, no cómo lo hace</span></div>
+        <div class="trait"><strong>Encapsulación</strong><span>el código externo no ve los detalles internos</span></div>
+        <div class="trait"><strong>Independencia</strong><span>podés cambiar la implementación sin romper nada afuera</span></div>
+      </div>
+    </div>
+
+    <p class="prose-note">En Python, la lista, la pila, la cola y el diccionario son TDA. Pila y cola quedan para más adelante — acá las nombramos solo como ejemplo.</p>
+
+    <div class="quiz" data-accent="tda">
+      <p class="quiz-title">Comprobá lo aprendido — elegí el TDA correcto</p>
+      <p class="quiz-intro">Para cada situación, pensá qué estructura usarías <em>por su comportamiento</em>, no por el nombre.</p>
+
+      <div class="match-quiz" id="matchTda">
+        <div class="match-row" data-answer="pila">
+          <span class="match-text">Una pila de platos para lavar: lavás primero el último que apoyaste arriba.</span>
+          <div class="match-options">
+            <button data-value="pila">Pila (LIFO)</button>
+            <button data-value="cola">Cola (FIFO)</button>
+            <button data-value="dict">Diccionario</button>
+            <button data-value="lista">Lista</button>
+          </div>
+        </div>
+        <div class="match-row" data-answer="cola">
+          <span class="match-text">Una cola de impresión: el primer documento que mandás es el primero que sale.</span>
+          <div class="match-options">
+            <button data-value="pila">Pila (LIFO)</button>
+            <button data-value="cola">Cola (FIFO)</button>
+            <button data-value="dict">Diccionario</button>
+            <button data-value="lista">Lista</button>
+          </div>
+        </div>
+        <div class="match-row" data-answer="dict">
+          <span class="match-text">Una agenda de contactos: buscás directo por el nombre, sin recorrer todo.</span>
+          <div class="match-options">
+            <button data-value="pila">Pila (LIFO)</button>
+            <button data-value="cola">Cola (FIFO)</button>
+            <button data-value="dict">Diccionario</button>
+            <button data-value="lista">Lista</button>
+          </div>
+        </div>
+        <div class="match-row" data-answer="lista">
+          <span class="match-text">Una lista de tareas en orden: te importa el orden en que las anotaste.</span>
+          <div class="match-options">
+            <button data-value="pila">Pila (LIFO)</button>
+            <button data-value="cola">Cola (FIFO)</button>
+            <button data-value="dict">Diccionario</button>
+            <button data-value="lista">Lista</button>
+          </div>
+        </div>
+      </div>
+      <p class="match-feedback" id="feedbackTda"></p>
+    </div>
+  </section>
+
+  <!-- TUPLAS -->
+  <section class="topic" id="tuplas" data-accent="tupla">
+    <div class="topic-head">
+      <span class="topic-glyph">( )</span>
+      <div>
+        <p class="topic-eyebrow">Video 02</p>
+        <h2>Tuplas</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="prose">
+        <p>Cuando necesitás guardar datos que <strong>no tienen que cambiar por accidente</strong> durante la ejecución: coordenadas de un punto, la fecha de nacimiento de alguien.</p>
+        <p>Es una secuencia <strong>ordenada e inmutable</strong>. Se accede por índice igual que en una lista, admite slicing (que siempre devuelve una tupla <em>nueva</em>, la original queda intacta), y se puede desempaquetar en variables distintas de una sola vez.</p>
+        <p class="gotcha"><strong>Gotcha clásico:</strong> una tupla de un solo elemento necesita la coma — <code>(1,)</code>, no <code>(1)</code>. Sin la coma, Python lo lee como un número común entre paréntesis.</p>
+        <p>Aunque es inmutable, tiene <code>count</code> e <code>index</code> para consultar, soporta <code>+</code> para concatenar y <code>*</code> para repetir. Y algo que se usa todo el tiempo: una función puede devolver varios valores separados por coma — Python los empaqueta en una tupla sola.</p>
+      </div>
+      <div class="code-panel">
+        <div class="code-tab">notas.py</div>
+        <pre><code><span class="tok-var">notas</span> = (<span class="tok-num">7</span>, <span class="tok-num">8</span>, <span class="tok-num">6</span>)
+<span class="tok-var">promedio</span> = <span class="tok-fn">sum</span>(<span class="tok-var">notas</span>) / <span class="tok-fn">len</span>(<span class="tok-var">notas</span>)
+<span class="tok-fn">print</span>(<span class="tok-str">f"Promedio: {promedio}"</span>)
+<span class="tok-comment"># Promedio: 7.0</span></code></pre>
+      </div>
+    </div>
+
+    <div class="quiz" data-accent="tupla">
+      <p class="quiz-title">Comprobá lo aprendido</p>
+      <div class="mcq" data-correct="b">
+        <p class="mcq-q">¿Qué es <code>t = (5)</code>?</p>
+        <div class="mcq-opts">
+          <button data-value="a">Una tupla con el número 5</button>
+          <button data-value="b">El número 5, entero — no es tupla</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+      <div class="mcq" data-correct="a">
+        <p class="mcq-q">Si hacés <code>t[1:3]</code> sobre una tupla, ¿qué pasa con la tupla original?</p>
+        <div class="mcq-opts">
+          <button data-value="a">Queda intacta — el slicing devuelve una tupla nueva</button>
+          <button data-value="b">Se recorta a esos elementos</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETS -->
+  <section class="topic" id="sets" data-accent="set">
+    <div class="topic-head">
+      <span class="topic-glyph">{ }</span>
+      <div>
+        <p class="topic-eyebrow">Video 03</p>
+        <h2>Sets</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="prose">
+        <p>Si alguna vez tuviste una lista con nombres repetidos y escribiste código extra solo para sacar los duplicados, un set te ahorra ese trabajo. Es una colección <strong>mutable de valores únicos</strong>: si agregás algo que ya está, no pasa nada.</p>
+        <p>No mantiene orden ni índice — no accedés por posición.</p>
+        <p class="gotcha"><strong>Gotcha:</strong> <code>{}</code> vacío crea un <em>diccionario</em>, no un set. Para un set vacío usá <code>set()</code>.</p>
+        <p>Métodos: <code>add</code>, <code>remove</code> (falla si no existe), <code>discard</code> (no se queja), <code>clear</code>. Y las operaciones de conjuntos: <code>|</code> unión, <code>&amp;</code> intersección, <code>-</code> diferencia, <code>^</code> diferencia simétrica.</p>
+      </div>
+      <div class="code-panel">
+        <div class="code-tab">sets_asistencia.py</div>
+        <pre><code><span class="tok-var">asistencia</span> = [<span class="tok-str">"Ana"</span>, <span class="tok-str">"Luis"</span>, <span class="tok-str">"Ana"</span>, <span class="tok-str">"Coco"</span>, <span class="tok-str">"Luis"</span>, <span class="tok-str">"Ana"</span>]
+<span class="tok-var">unicos</span> = <span class="tok-fn">set</span>(<span class="tok-var">asistencia</span>)
+<span class="tok-var">conteo</span> = {<span class="tok-var">nombre</span>: <span class="tok-var">asistencia</span>.<span class="tok-fn">count</span>(<span class="tok-var">nombre</span>) <span class="tok-kw">for</span> <span class="tok-var">nombre</span> <span class="tok-kw">in</span> <span class="tok-var">unicos</span>}
+<span class="tok-fn">print</span>(<span class="tok-var">conteo</span>)
+<span class="tok-comment"># {'Coco': 1, 'Luis': 2, 'Ana': 3}</span></code></pre>
+      </div>
+    </div>
+
+    <p class="prose-note">Acá el set no reemplaza a la lista, la <strong>complementa</strong>: la lista guarda el historial completo, el set da la versión sin repetidos. Este patrón — lista para el historial, set para lo único — lo vas a ver todo el tiempo.</p>
+
+    <div class="quiz" data-accent="set">
+      <p class="quiz-title">Comprobá lo aprendido</p>
+      <div class="mcq" data-correct="b">
+        <p class="mcq-q"><code>vacio = {}</code> — ¿qué tipo es <code>vacio</code>?</p>
+        <div class="mcq-opts">
+          <button data-value="a">Un set vacío</button>
+          <button data-value="b">Un diccionario vacío</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+      <div class="mcq" data-correct="a">
+        <p class="mcq-q"><code>{1,2,3} &amp; {2,3,4}</code> — ¿qué devuelve?</p>
+        <div class="mcq-opts">
+          <button data-value="a"><code>{2, 3}</code> — la intersección</button>
+          <button data-value="b"><code>{1, 2, 3, 4}</code> — la unión</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DICCIONARIOS -->
+  <section class="topic" id="dicts" data-accent="dict">
+    <div class="topic-head">
+      <span class="topic-glyph">{ : }</span>
+      <div>
+        <p class="topic-eyebrow">Video 04</p>
+        <h2>Diccionarios</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="prose">
+        <p>La estructura más usada de toda la unidad. En vez de acceder por posición, accedés por una <strong>clave</strong> que vos elegís: el nombre de un producto, un usuario, un id.</p>
+        <p>Es una colección de pares clave-valor, <strong>mutable</strong>, con claves únicas. Tres formas de acceder: corchetes (rompe con <code>KeyError</code> si la clave no existe), <code>.get()</code> (devuelve <code>None</code> si no existe), o <code>.get(clave, default)</code> con un valor por defecto.</p>
+        <p><code>.items()</code>, <code>.keys()</code> y <code>.values()</code> no devuelven listas — devuelven objetos iterables propios de Python. Envolvelos con <code>list()</code> si necesitás indexarlos.</p>
+        <p class="gotcha"><strong>Gotcha:</strong> usar una lista como clave tira <code>TypeError</code> — las claves tienen que ser inmutables. Por eso una tupla sí puede ser clave, y una lista no.</p>
+      </div>
+      <div class="code-panel">
+        <div class="code-tab">precios.py</div>
+        <pre><code><span class="tok-var">precios</span> = {<span class="tok-str">"pan"</span>: <span class="tok-num">500</span>, <span class="tok-str">"leche"</span>: <span class="tok-num">800</span>, <span class="tok-str">"arroz"</span>: <span class="tok-num">650</span>}
+<span class="tok-var">precios</span>[<span class="tok-str">"huevo"</span>] = <span class="tok-num">900</span>          <span class="tok-comment"># agregar</span>
+<span class="tok-var">precios</span>[<span class="tok-str">"pan"</span>] = <span class="tok-num">550</span>            <span class="tok-comment"># actualizar</span>
+<span class="tok-var">productos</span> = <span class="tok-fn">list</span>(<span class="tok-var">precios</span>.<span class="tok-fn">keys</span>())</code></pre>
+      </div>
+    </div>
+
+    <div class="quiz" data-accent="dict">
+      <p class="quiz-title">Comprobá lo aprendido</p>
+      <div class="mcq" data-correct="b">
+        <p class="mcq-q"><code>stock.get("mango", 0)</code> y <code>"mango"</code> no está cargado. ¿Qué devuelve?</p>
+        <div class="mcq-opts">
+          <button data-value="a">Rompe con KeyError</button>
+          <button data-value="b"><code>0</code> — el valor por defecto</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+      <div class="mcq" data-correct="a">
+        <p class="mcq-q">¿Por qué <code>turnos[["martes","15hs"]] = "odontologo"</code> tira error?</p>
+        <div class="mcq-opts">
+          <button data-value="a">La clave es una lista — mutable, no puede ser clave</button>
+          <button data-value="b">Faltan comillas en "odontologo"</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DICCIONARIOS ANIDADOS -->
+  <section class="topic" id="anidados" data-accent="nested">
+    <div class="topic-head">
+      <span class="topic-glyph">{{ }}</span>
+      <div>
+        <p class="topic-eyebrow">Video 05</p>
+        <h2>Diccionarios anidados</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="prose">
+        <p>Un diccionario adentro de otro. Es la forma más natural de representar una entidad con varios campos — un contacto con teléfono y email, un alumno con nombre, nota y comisión — sin quilombo de variables sueltas.</p>
+        <p>Accedés encadenando corchetes: <code>agenda["Ana"]["telefono"]</code>. Para recorrerlo necesitás <strong>dos <code>for</code></strong>: uno externo por cada contacto, uno interno con <code>.items()</code> por cada campo.</p>
+        <p><code>setdefault</code> te asegura que exista una clave antes de usarla — si no está, la crea con un valor por defecto, así te ahorrás el <code>KeyError</code>.</p>
+      </div>
+      <div class="code-panel">
+        <div class="code-tab">agenda.py</div>
+        <pre><code><span class="tok-var">agenda</span> = {}
+<span class="tok-var">nombre</span> = <span class="tok-fn">input</span>(<span class="tok-str">"Nombre: "</span>)
+<span class="tok-var">telefono</span> = <span class="tok-fn">input</span>(<span class="tok-str">"Telefono: "</span>)
+<span class="tok-var">email</span> = <span class="tok-fn">input</span>(<span class="tok-str">"Email: "</span>)
+<span class="tok-var">agenda</span>[<span class="tok-var">nombre</span>] = {<span class="tok-str">"telefono"</span>: <span class="tok-var">telefono</span>, <span class="tok-str">"email"</span>: <span class="tok-var">email</span>}
+<span class="tok-fn">print</span>(<span class="tok-var">agenda</span>[<span class="tok-var">nombre</span>][<span class="tok-str">"telefono"</span>])</code></pre>
+      </div>
+    </div>
+
+    <div class="callout" data-accent="nested">
+      <p class="callout-label">Tabla comparativa — la unidad completa en 4 filas</p>
+      <table class="compare-table">
+        <thead><tr><th></th><th>Ordenado</th><th>Mutable</th><th>Duplicados</th></tr></thead>
+        <tbody>
+          <tr><td><code>[ ]</code> Lista</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+          <tr><td><code>( )</code> Tupla</td><td>Sí</td><td>No</td><td>Sí</td></tr>
+          <tr><td><code>{ }</code> Set</td><td>No</td><td>Sí</td><td>No</td></tr>
+          <tr><td><code>{ : }</code> Diccionario</td><td>Desde 3.7</td><td>Sí</td><td>Claves no, valores sí</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quiz" data-accent="nested">
+      <p class="quiz-title">Comprobá lo aprendido</p>
+      <div class="mcq" data-correct="a">
+        <p class="mcq-q">De la tabla: ¿cuál es la única estructura que no permite duplicados en absoluto (ni claves ni valores)?</p>
+        <div class="mcq-opts">
+          <button data-value="a">El set</button>
+          <button data-value="b">El diccionario</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPRENSIONES / COUNTER / TUPLA CLAVE -->
+  <section class="topic" id="combo" data-accent="combo">
+    <div class="topic-head">
+      <span class="topic-glyph">[for]</span>
+      <div>
+        <p class="topic-eyebrow">Video 06</p>
+        <h2>Comprensiones, Counter y tupla como clave</h2>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="prose">
+        <p>Son atajos, no conceptos nuevos. Una <strong>comprensión</strong> arma una lista, set o diccionario en una sola línea a partir de un bucle — exactamente lo mismo que un <code>for</code> de varias líneas, comprimido.</p>
+        <p><code>Counter</code> (de <code>collections</code>) cuenta automáticamente cuántas veces aparece cada elemento, sin que programes el conteo a mano. <code>.most_common(n)</code> te da los <code>n</code> más frecuentes.</p>
+        <p class="gotcha"><strong>Tupla como clave:</strong> una clave de diccionario tiene que ser <em>hasheable</em> (inmutable). Una tupla cumple esa condición — sirve para representar un turno con día y hora juntos, sin necesitar dos diccionarios.</p>
+      </div>
+      <div class="code-panel">
+        <div class="code-tab">turnos.py</div>
+        <pre><code><span class="tok-var">turnos</span> = {}
+<span class="tok-var">turnos</span>[(<span class="tok-str">"martes"</span>, <span class="tok-str">"15hs"</span>)] = <span class="tok-str">"odontologo"</span>
+
+<span class="tok-var">capitales</span> = {<span class="tok-str">"Argentina"</span>: <span class="tok-str">"Buenos Aires"</span>}
+<span class="tok-var">paises</span> = {<span class="tok-var">c</span>: <span class="tok-var">p</span> <span class="tok-kw">for</span> <span class="tok-var">p</span>, <span class="tok-var">c</span> <span class="tok-kw">in</span> <span class="tok-var">capitales</span>.<span class="tok-fn">items</span>()}
+<span class="tok-comment"># invierte clave y valor en una línea</span></code></pre>
+      </div>
+    </div>
+
+    <div class="quiz" data-accent="combo">
+      <p class="quiz-title">Comprobá lo aprendido</p>
+      <div class="mcq" data-correct="b">
+        <p class="mcq-q">Necesitás saber <strong>cuántas veces</strong> aparece cada palabra en una frase. ¿Qué usás?</p>
+        <div class="mcq-opts">
+          <button data-value="a"><code>set(frase.split())</code> — te da las palabras únicas</button>
+          <button data-value="b"><code>Counter(frase.split())</code> — te da únicas + cuántas veces</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+      <div class="mcq" data-correct="a">
+        <p class="mcq-q">¿Por qué una tupla puede ser clave de diccionario y una lista no?</p>
+        <div class="mcq-opts">
+          <button data-value="a">La tupla es inmutable (hasheable), la lista no</button>
+          <button data-value="b">La tupla ocupa menos memoria</button>
+        </div>
+        <p class="mcq-explain"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUANDO USAR + INTEGRADOR -->
+  <section class="topic topic-close" id="decidir" data-accent="decide">
+    <div class="topic-head">
+      <span class="topic-glyph">?:</span>
+      <div>
+        <p class="topic-eyebrow">Video 07 — cierre</p>
+        <h2>Cuándo usar cada uno</h2>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Elegir la estructura correcta depende de tres preguntas: ¿el orden te importa? ¿los datos van a cambiar? ¿puede haber valores repetidos? Y una razón de fondo más allá de la sintaxis: <strong>buscar por clave en un diccionario es prácticamente instantáneo</strong>; recorrer una lista buscando un valor se vuelve más lento cuantos más elementos tenga.</p>
+    </div>
+
+    <div class="decide-tool" data-accent="decide">
+      <p class="quiz-title">Herramienta — ¿qué estructura uso?</p>
+      <div class="decide-step" data-step="1">
+        <p class="decide-q">¿Necesitás buscar rápido por nombre o clave?</p>
+        <button class="decide-btn" data-go="dict-result">Sí</button>
+        <button class="decide-btn" data-go="step2">No</button>
+      </div>
+      <div class="decide-step" data-step="step2" hidden>
+        <p class="decide-q">¿Los datos no deben cambiar una vez creados?</p>
+        <button class="decide-btn" data-go="tuple-result">Sí</button>
+        <button class="decide-btn" data-go="step3">No</button>
+      </div>
+      <div class="decide-step" data-step="step3" hidden>
+        <p class="decide-q">¿Necesitás valores únicos u operaciones de conjuntos (unión, intersección)?</p>
+        <button class="decide-btn" data-go="set-result">Sí</button>
+        <button class="decide-btn" data-go="list-result">No — uso lista</button>
+      </div>
+      <div class="decide-result" data-result="dict-result" hidden><span class="decide-glyph">{ : }</span><p>Usá un <strong>diccionario</strong>. Búsqueda por clave casi instantánea.</p></div>
+      <div class="decide-result" data-result="tuple-result" hidden><span class="decide-glyph">( )</span><p>Usá una <strong>tupla</strong>. Los datos quedan protegidos de cambios accidentales.</p></div>
+      <div class="decide-result" data-result="set-result" hidden><span class="decide-glyph">{ }</span><p>Usá un <strong>set</strong>. Sin duplicados, con operaciones de conjuntos.</p></div>
+      <div class="decide-result" data-result="list-result" hidden><span class="decide-glyph">[ ]</span><p>Usá una <strong>lista</strong>. Orden y mutabilidad sin restricciones extra.</p></div>
+      <button class="decide-reset" id="decideReset" hidden>Volver a empezar</button>
+    </div>
+
+    <div class="integrador">
+      <p class="quiz-title">Ejercicio integrador — Agenda de cumpleaños</p>
+      <p class="prose-note">Combina las tres estructuras que más usaste en la unidad: tupla, set y diccionario.</p>
+      <div class="code-panel">
+        <div class="code-tab">cumpleanos.py</div>
+        <pre><code><span class="tok-var">cumples</span> = [(<span class="tok-str">"Ana"</span>, <span class="tok-str">"03-05"</span>), (<span class="tok-str">"Luis"</span>, <span class="tok-str">"12-11"</span>), (<span class="tok-str">"Coco"</span>, <span class="tok-str">"03-05"</span>)]
+
+<span class="tok-var">fechas_unicas</span> = {<span class="tok-var">fecha</span> <span class="tok-kw">for</span> _, <span class="tok-var">fecha</span> <span class="tok-kw">in</span> <span class="tok-var">cumples</span>}
+<span class="tok-var">agenda</span> = {<span class="tok-var">nombre</span>: <span class="tok-var">fecha</span> <span class="tok-kw">for</span> <span class="tok-var">nombre</span>, <span class="tok-var">fecha</span> <span class="tok-kw">in</span> <span class="tok-var">cumples</span>}
+
+<span class="tok-fn">print</span>(<span class="tok-var">agenda</span>[<span class="tok-str">"Luis"</span>])
+<span class="tok-comment"># 12-11</span></code></pre>
+      </div>
+      <p class="prose-note">Tupla para juntar datos que van pegados (nombre + fecha), set para sacar lo único (fechas sin repetir), diccionario para buscar directo por nombre. Las tres estructuras que más vas a usar de acá en adelante.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Unidad 7 · Estructuras de Datos Complejas — Programación I, TUP</p>
+    <p class="footer-sub">Complemento de la <a href="#" id="playlistLink">playlist de la clase</a>. Dudas durante el horario del encuentro, en el foro.</p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
